@@ -1,0 +1,57 @@
+.btn-prime {
+  background-color: $primary;
+  border-color: $primary;
+  color: $o-white;
+  border-radius: $border-radius;
+  padding: 0.5rem 2rem;
+  text-decoration: none;
+  transition: $transition-base;
+  text-align: center;
+
+  &:hover {
+    background-color: $primary-hover;
+    border-color: $success;
+    color: $o-white;
+  }
+}
+
+form {
+  border-radius: $border-radius;
+}
+label {
+  margin: 0.5rem 0;
+  font-weight: 600;
+}
+.custom-control-label {
+  margin-left: 0.5rem;
+  font-weight: 400;
+}
+
+.btn-module {
+  display: grid;
+  text-align: center;
+  text-decoration: none;
+  margin-bottom: 2rem;
+  border-radius: $border-radius;
+  background: $o-white;
+  font-weight: 500;
+  font-size: 1.25rem;
+  color: $dark;
+  border: 5px solid $secondary;
+  opacity: 0.5;
+  transition: $transition-base;
+
+  &.selected {
+    opacity: 1;
+    border: 5px solid $primary;
+  }
+  &:hover {
+    opacity: 1;
+    color: $dark;
+  }
+  img {
+    height: 200px;
+    object-fit: contain;
+    margin-bottom: 0.5rem;
+  }
+}
