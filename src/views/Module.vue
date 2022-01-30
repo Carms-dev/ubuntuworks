@@ -19,26 +19,33 @@
       <p class="lead mb-5" v-if="currentModule.description">{{ currentModule.description }}</p>
 
       <div
-        class="d-flex justify-content-between align-items-start py-3"
-        v-for="(question, index) in questions"
-        :key="question.key"
-      >
-        <Question :form="form" :question="question" :index="index" />
+        class="py-3"
+        v-for="(section) in sections"
+        :key="section.sectionHeader"
 
-        <InfoPopover
-          v-if="question.help"
-          :content="question.help"
-          :title="'Information'"
-        />
+      >
+        <h2>{{ section.sectionHeader }}</h2>
+        <div
+          class="my-5 question"
+          v-for="(question, index) in section.questions"
+          :key="question.label"
+        >
+          <Question :form="form" :question="question" :index="index" />
+          <InfoPopover
+            v-if="question.help"
+            :content="question.help"
+            :title="'Information'"
+          />
+        </div>
       </div>
 
       <!-- buttons -->
-      <FormButtons />
+      <FormButtons :isFirst="isFirst" :isLast="isLast" />
     </b-form>
 
-      <b-card class="mt-3" header="Form Data Result">
-        <pre class="m-0">{{ form }}</pre>
-      </b-card>
+    <b-card class="mt-3" header="Form Data Result">
+      <pre class="m-0">{{ form }}</pre>
+    </b-card>
   </div>
 
 </template>
@@ -59,13 +66,13 @@ export default {
   },
   data() {
     return {
-      // params
       reportId: this.$route.params.report_id,
       currentModule: allModules.find(({key}) => key === this.$route.params.module_key),
-      questions: modulesQuestions[this.$route.params.module_key],
-      form: modulesQuestions[this.$route.params.module_key].reduce((a, v) => ({ ...a, [v.key]: v.initial }), {}),
+      sections: modulesQuestions[this.$route.params.module_key],
+      form: {},
       selectedModules: [],
       report: {},
+      isFirst: null,
       isLast: null,
     };
   },
@@ -77,9 +84,19 @@ export default {
         this.report = snapshot.data()
       })
       .then(() => {
-        const selectedModulesKeys = JSON.parse(JSON.stringify(this.report.basic.selected_modules))
+        const selectedModulesKeys = JSON.parse(JSON.stringify(this.report.selectedModuleKeys))
         this.selectedModules = allModules.filter(({ key }) => selectedModulesKeys.includes(key))
+        this.isFirst = selectedModulesKeys.at(0) === this.currentModule.key
         this.isLast = selectedModulesKeys.at(-1) === this.currentModule.key
+
+        if (this.$route.params.module_key in this.report) {
+          this.form = this.report[this.$route.params.module_key]
+        } else {
+          const sections = JSON.parse(JSON.stringify(modulesQuestions[this.$route.params.module_key]))
+          sections.forEach(({questions}) => {
+            questions.forEach(question => this.form = {...this.form, [question.label]: question.initial})
+          })
+        }
       })
   },
   methods: {
@@ -104,7 +121,7 @@ export default {
 
           // Routing
           // Reached last module, direct to Reports Show
-          const selectedModuleKeys = this.report.basic.selected_modules
+          const selectedModuleKeys = this.report.selectedModuleKeys
           if (this.isLast) {
             this.$router.push(`/reports/${this.reportId}`);
           // Otherwise go to the next module
@@ -122,3 +139,6 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+</style>

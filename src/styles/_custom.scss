@@ -22,6 +22,10 @@ label {
   margin: 0.5rem 0;
   font-weight: 600;
 }
+textarea:focus, input:focus{
+  outline: none !important;
+  box-shadow: none !important;
+}
 .custom-control-label {
   margin-left: 0.5rem;
   font-weight: 400;
@@ -54,4 +58,9 @@ label {
     object-fit: contain;
     margin-bottom: 0.5rem;
   }
+}
+.question {
+  display: grid;
+  grid-template-columns: 1fr 50px;
+  gap: 0.5rem;
 }

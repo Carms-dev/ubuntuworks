@@ -1,10 +1,15 @@
 <template>
   <div class="row">
     <div class="col-md-12">
-      <p>{{ report.report_id }}</p>
+      <b-card class="mt-3" header="Form Data Result">
+        <pre class="m-0">{{ report}}</pre>
+      </b-card>
+
+
+      <!-- <p>{{ report.report_id }}</p>
       <p>{{ report.event.name }}</p>
       <p>{{ report.event.type }}</p>
-      <p>{{ report.event.mode }}</p>
+      <p>{{ report.event.mode }}</p> -->
       <!-- TODO: Add Auth -->
       <!-- TODO: Add Update & Delete -->
       <!-- <router-link :to="{name: 'edit', params: { id: user.key }}" class="btn btn-primary">

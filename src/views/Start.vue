@@ -5,7 +5,7 @@
       <h1 class="display-5 mb-3">Let's set it up!</h1>
       <p class="lead text-secondary mb-4">Gather the basic information about your event and select relevant areas of disabilities!</p>
       <div
-        class="d-flex justify-content-between align-items-start py-3"
+        class="my-5 question"
         v-for="(question, index) in questions"
         :key="question.key"
       >
@@ -20,9 +20,9 @@
       <!-- buttons -->
       <b-button type="submit" variant="primary">Next &raquo;</b-button>
     </b-form>
-      <!-- <b-card class="mt-3" header="Form Data Result">
+      <b-card class="mt-3" header="Form Data Result">
         <pre class="m-0">{{ form }}</pre>
-      </b-card> -->
+      </b-card>
   </div>
 </template>
 
@@ -36,7 +36,7 @@ export default {
   data() {
     return {
       questions: questions,
-      form: questions.reduce((a, v) => ({ ...a, [v.key]: v.initial }), {}),
+      form: questions.reduce((a, v) => ({ ...a, [v.label]: v.initial }), {}),
     };
   },
   components: {
@@ -47,14 +47,24 @@ export default {
     onFormSubmit(event) {
       event.preventDefault();
 
-      const report = { basic: this.form };
+      const moduleQuestionKey = this.questions.find(question => question.key === "report_modules").label
 
+      const selectedModuleKeys = this.form[moduleQuestionKey];
+
+      delete this.form[moduleQuestionKey];
+
+      const report = {
+        basic: this.form,
+        selectedModuleKeys,
+      };
+      console.log(report);
+      console.log(report.selectedModuleKeys);
       db.collection("reports")
         .add(report)
         .then((res) => {
           // Go to first module
           this.$router.push(
-            `/reports/${res.id}/modules/${report.basic.selected_modules[0]}`
+            `/reports/${res.id}/modules/${report.selectedModuleKeys[0]}`
           );
         })
         .catch((error) => {
@@ -64,3 +74,7 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+
+</style>

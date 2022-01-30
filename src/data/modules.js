@@ -1,25 +1,25 @@
-options: [
-  {
-    label: "Audio & Visual Accessibility (required)",
-    value: "audio_visual",
-    checked: true,
-    disabled: true,
-  },
-  {
-    label: "Communication Accessibility (required)",
-    value: "communication",
-    checked: true,
-    disabled: true,
-  },
-  {
-    label: "Physical Accessiblity",
-    value: "physical"
-  },
-  {
-    label: "Covid-19 Safety",
-    value: "covid"
-  }
-]
+// options: [
+//   {
+//     label: "Audio & Visual Accessibility (required)",
+//     value: "audio_visual",
+//     checked: true,
+//     disabled: true,
+//   },
+//   {
+//     label: "Communication Accessibility (required)",
+//     value: "communication",
+//     checked: true,
+//     disabled: true,
+//   },
+//   {
+//     label: "Physical Accessiblity",
+//     value: "physical"
+//   },
+//   {
+//     label: "Covid-19 Safety",
+//     value: "covid"
+//   }
+// ]
 
 export default [
   {

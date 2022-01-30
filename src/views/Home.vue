@@ -28,16 +28,19 @@
     <section class="row text-center g-5 py-5 steps">
       <h2 class="display-6">How it works!</h2>
       <div class="col-12 col-sm-6 col-md-4 p-3">
-        <b-icon icon="check2-square" class="display-3 text-warning mb-4"></b-icon>
+        <h6 class="display-1 text-warning mb-4 font-weight-bold">1</h6>
         <p>Check off all boxes which apply to your event. Then, we do the rest!</p>
+        <!-- <b-icon icon="check2-square"></b-icon> -->
       </div>
       <div class="col-12 col-sm-6 col-md-4 p-3">
-        <b-icon icon="layout-text-window-reverse" class="display-3 text-warning mb-4"></b-icon>
+        <h6 class="display-1 text-warning mb-4 font-weight-bold">2</h6>
         <p>The info from your input will be gathered automatically, ready to share!</p>
+        <!-- <b-icon icon="layout-text-window-reverse"></b-icon> -->
       </div>
       <div class="col-12 col-sm-6 col-md-4 p-3">
-        <b-icon icon="share" class="display-3 text-warning mb-4"></b-icon>
+        <h6 class="display-1 text-warning font-weight-bold">3</h6>
         <p>Share the results on social media or a link that you can email to everyone on your invite list.</p>
+        <!-- <b-icon icon="share"></b-icon> -->
       </div>
     </section>
 
@@ -109,9 +112,6 @@ export default {
   .hero-image img {
     width: 100%;
     object-fit: cover;
-  }
-  .steps h3 {
-    color: $yellow;
   }
   .jumbotron {
     border-radius: $border-radius;

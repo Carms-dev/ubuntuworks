@@ -6,26 +6,27 @@
   >
     <!-- Input -->
     <b-form-input
+      class="input-underline"
       v-if="question.type === 'input'"
       :id="'input-' + index"
-      v-model="form[question.key]"
+      v-model="form[question.label]"
       :required="question.required ? true : false"
     >
     </b-form-input>
 
     <!-- Radio -->
     <b-form-radio-group
-      v-else-if="question.type === 'radio'"
-      v-model="form[question.key]"
+      v-else-if="question.type === 'multiple-choice'"
+      v-model="form[question.label]"
       :options="question.options"
       :name="'radios-' + index"
     >
       <template v-if="question.required">
-        <b-form-invalid-feedback :state="Boolean(form[question.key])">
+        <b-form-invalid-feedback :state="Boolean(form[question.label])">
           Please select one
         </b-form-invalid-feedback>
 
-        <b-form-valid-feedback :state="Boolean(form[question.key])">
+        <b-form-valid-feedback :state="Boolean(form[question.label])">
           Nice!
         </b-form-valid-feedback>
       </template>
@@ -33,21 +34,19 @@
 
     <!-- Checkbox group -->
     <b-form-checkbox-group
-      v-else-if="question.type === 'checkbox-group'"
-      v-model="form[question.key]"
+      v-else-if="question.type === 'multi-select'"
+      v-model="form[question.label]"
       :id="'checkboxes-' + index"
       :aria-describedby="question.label"
     >
       <div
         v-for="option in question.options"
-        :key="question.key + '-' + option.value"
+        :key="question.label + '-' + option"
       >
         <b-form-checkbox
-          :value="option.value"
-          :checked="option.checked"
-          :disabled="option.disabled"
+          :value="option"
         >
-          {{ option.label }}
+          {{ option }}
         </b-form-checkbox>
       </div>
     </b-form-checkbox-group>
@@ -56,7 +55,7 @@
     <b-form-select
       v-else-if="question.type === 'select'"
       :id="'input-' + index"
-      v-model="form[question.key]"
+      v-model="form[question.label]"
       :options="question.options"
       :required="question.required"
     ></b-form-select>
@@ -64,7 +63,7 @@
     <!-- Custom Checkbox for Module Selection -->
     <b-form-checkbox-group
       v-else-if="question.type === 'module-checkbox-group'"
-      v-model="form[question.key]"
+      v-model="form[question.label]"
       :id="'checkboxes-' + index"
       :aria-describedby="question.label"
       class="row py-4"
@@ -85,8 +84,6 @@
         </b-form-checkbox>
       </div>
     </b-form-checkbox-group>
-
-
 
   </b-form-group>
 </template>
@@ -123,5 +120,14 @@ export default {
 <style scoped>
   .custom-control-label {
     font-size: 5rem;
+  }
+  .input-underline {
+    margin-top: 1rem;
+    border: 0;
+    border-radius: 0;
+    border-bottom: 2px solid grey;
+  }
+  input[type="radio"]:checked:after {
+    background-color: greenyellow;
   }
 </style>
