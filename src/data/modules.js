@@ -58,5 +58,6 @@ export default [
       file: "covid.png",
       alt: "Black Man Dancing with a mask and Leg Prosthetic",
     },
+    description: "Covid-19 has changed accessibility for in person and hybrid events as many people with disabilities (especially those with autoimmune diseases) are at higher risk for catching Covid-19 that leads to life-threatening complications. In a recent community based needs assessment of people with disabilities in Montreal, many people wanted to experience in person events again to help break isolation but were deeply concerned for their safety. Thus, it is imperative that health guidelines are strictly followed at your event."
   }
 ]
