@@ -1,33 +1,45 @@
 <template>
   <div class="row">
     <div class="col-md-12">
-      <b-card class="mt-3" header="Form Data Result">
-        <pre class="m-0">{{ report}}</pre>
-      </b-card>
+      <h1>Accessibility FAQS</h1>
+      <p>{{ report.basic["What's the event name?"] }} </p>
 
 
-      <!-- <p>{{ report.report_id }}</p>
-      <p>{{ report.event.name }}</p>
-      <p>{{ report.event.type }}</p>
-      <p>{{ report.event.mode }}</p> -->
-      <!-- TODO: Add Auth -->
-      <!-- TODO: Add Update & Delete -->
-      <!-- <router-link :to="{name: 'edit', params: { id: user.key }}" class="btn btn-primary">
-              Edit
-            </router-link>
-            <button @click.prevent="deleteUser(user.key)" class="btn btn-danger">Delete</button> -->
+      <!-- Basic Info -->
+      <div
+        v-for="moduleKey in report.selectedModuleKeys"
+        :key="moduleKey"
+        class="my-5"
+      >
+        <!-- Module Header -->
+        <h3>{{ allModules.find(m => m.key === moduleKey).name }}</h3>
+        <div
+          v-for="([question, answer], index) in Object.entries(report[moduleKey])"
+          :key="question"
+        >
+          <Accordion :question="question" :answer="answer" :accordionId="moduleKey + index"/>
+        </div>
+      </div>
     </div>
+    <!-- <b-card class="mt-3" header="Form Data Result">
+      <pre class="m-0">{{ report}}</pre>
+    </b-card> -->
   </div>
 </template>
 
-
 <script>
 import db from "../firebaseDb";
+import Accordion from "../components/Accordion.vue";
+import allModules from "../data/modules";
 
 export default {
+  components: {
+    Accordion,
+  },
   data() {
     return {
       report: {},
+      allModules: allModules,
     };
   },
   created() {
@@ -40,18 +52,6 @@ export default {
           report_id: this.$route.params.report_id,
         };
       });
-  },
-  methods: {
-    // deleteUser(id){
-    //   if (window.confirm("Do you really want to delete?")) {
-    //     db.collection("users").doc(id).delete().then(() => {
-    //         console.log("Document deleted!");
-    //     })
-    //     .catch((error) => {
-    //         console.error(error);
-    //     })
-    //   }
-    // }
   },
 };
 </script>

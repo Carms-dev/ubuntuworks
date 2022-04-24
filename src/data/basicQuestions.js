@@ -1,5 +1,11 @@
 export default [
   {
+    label: "What's the event name?",
+    type: "input",
+    initial: '',
+    required: true,
+  },
+  {
     label: "Will there be an accessibility point person at your event?",
     help: "This is someone who is a part of your organization or hired specifically to help direct people to accessible seating, entrances, open doors etc. This is not someone who is a personal care attendant.",
     type: "multiple-choice",

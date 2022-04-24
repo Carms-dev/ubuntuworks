@@ -22,7 +22,6 @@
         class="py-3"
         v-for="(section) in sections"
         :key="section.sectionHeader"
-
       >
         <h2>{{ section.sectionHeader }}</h2>
         <div
