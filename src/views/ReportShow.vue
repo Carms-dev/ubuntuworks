@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-12">
       <h1>Accessibility FAQS</h1>
-      <p>{{ report.basic["What's the event name?"] }} </p>
+      <p>{{ eventName }} </p>
 
 
       <!-- Basic Info -->
@@ -40,6 +40,7 @@ export default {
     return {
       report: {},
       allModules: allModules,
+      eventName: "",
     };
   },
   created() {
@@ -51,6 +52,7 @@ export default {
           ...snapshot.data(),
           report_id: this.$route.params.report_id,
         };
+        this.eventName = this.report.basic["What's the event name?"];
       });
   },
 };

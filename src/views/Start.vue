@@ -57,8 +57,6 @@ export default {
         basic: this.form,
         selectedModuleKeys,
       };
-      console.log(report);
-      console.log(report.selectedModuleKeys);
       db.collection("reports")
         .add(report)
         .then((res) => {

@@ -1,11 +1,13 @@
 export default [
   {
+    key: "event_name",
     label: "What's the event name?",
     type: "input",
     initial: '',
     required: true,
   },
   {
+    key: "has_point_person",
     label: "Will there be an accessibility point person at your event?",
     help: "This is someone who is a part of your organization or hired specifically to help direct people to accessible seating, entrances, open doors etc. This is not someone who is a personal care attendant.",
     type: "multiple-choice",
@@ -14,7 +16,8 @@ export default [
     options: [ 'Yes', 'No' ],
   },
   {
-    label: "Supplement information on this accessibility point person?",
+    key: "point_person",
+    label: "Contact information for this accessibility point person?",
     type: "input",
     initial: '',
   },
@@ -48,14 +51,15 @@ export default [
     ]
   },
   {
+    key: "event_type",
     label: "What type of event are you hosting?",
     help: "Hybrid is the most accessible type of event that is currently most needed by many people with disabilities",
     type: "multiple-choice",
     required: true,
     options: [
-      "The event is fully online",
-      "The event is a hybrid of online & in-person",
-      "The event is fully in person",
+      "Fully online",
+      "A hybrid of online & in-person",
+      "Fully in person",
     ],
     initial: "",
   }
